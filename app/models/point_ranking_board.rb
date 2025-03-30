@@ -1,0 +1,3 @@
+class PointRankingBoard < RankingBoard
+
+end

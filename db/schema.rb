@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_30_120150) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_30_120742) do
   create_table "projects", force: :cascade do |t|
     t.string "code"
     t.string "secret"
@@ -18,4 +18,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_30_120150) do
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_projects_on_code", unique: true
   end
+
+  create_table "ranking_boards", force: :cascade do |t|
+    t.string "type"
+    t.integer "project_id", null: false
+    t.integer "num", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["num"], name: "index_ranking_boards_on_num", unique: true
+    t.index ["project_id"], name: "index_ranking_boards_on_project_id"
+  end
+
+  add_foreign_key "ranking_boards", "projects"
 end
