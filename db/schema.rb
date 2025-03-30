@@ -10,13 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_30_120742) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_30_132946) do
   create_table "projects", force: :cascade do |t|
     t.string "code"
     t.string "secret"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_projects_on_code", unique: true
+  end
+
+  create_table "rank_items", force: :cascade do |t|
+    t.string "type"
+    t.integer "ranking_board_id", null: false
+    t.float "score", null: false
+    t.string "name"
+    t.string "uid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ranking_board_id"], name: "index_rank_items_on_ranking_board_id"
+    t.index ["score"], name: "index_rank_items_on_score"
+    t.index ["uid"], name: "index_rank_items_on_uid", unique: true
+    t.index ["updated_at"], name: "index_rank_items_on_updated_at"
   end
 
   create_table "ranking_boards", force: :cascade do |t|
@@ -29,5 +43,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_30_120742) do
     t.index ["project_id"], name: "index_ranking_boards_on_project_id"
   end
 
+  add_foreign_key "rank_items", "ranking_boards"
   add_foreign_key "ranking_boards", "projects"
 end

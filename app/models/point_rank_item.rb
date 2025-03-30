@@ -1,0 +1,2 @@
+class PointRankItem < RankItem
+end
