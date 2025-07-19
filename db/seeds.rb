@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+pj = Project.find_or_create_by!(code: 'TsumugiStep')
+
+if pj.ranking_boards.blank?
+  PointRankingBoard.create!(project: pj)
+end
