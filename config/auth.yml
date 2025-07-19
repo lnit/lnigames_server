@@ -1,0 +1,11 @@
+default: &default
+  salt: <%= Rails.application.credentials.dig(:auth, :salt) %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
