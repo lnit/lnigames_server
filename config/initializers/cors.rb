@@ -1,6 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "localhost", "unityroom.com"
+    origins /\Ahttp:\/\/localhost(:\d+)?\z/, "unityroom.com"
 
     resource "*",
       headers: :any,
