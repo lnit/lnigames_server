@@ -8,8 +8,20 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-pj = Project.find_or_create_by!(code: 'TsumugiStep')
+puts "Seeding initial data..."
+PT, TM = PointRankingBoard, TimeRankingBoard
+projects = [
+  { code: "TsumugiStep", board_klass: PT },
+  { code: "AkariFlyHigh", board_klass: TM },
+  { code: "MeshiCatch", board_klass: TM },
+  { code: "AkariSoba", board_klass: PT },
+]
 
-if pj.ranking_boards.blank?
-  PointRankingBoard.create!(project: pj)
+projects.each do |project_data|
+  project = Project.find_or_create_by!(code: project_data[:code])
+
+  if project.ranking_boards.blank?
+    project_data[:board_klass].create!(project: project)
+    puts "Created ranking board for project: #{project.code} with class: #{project_data[:board_klass]}"
+  end
 end

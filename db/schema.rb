@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_30_133603) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_26_151025) do
   create_table "projects", force: :cascade do |t|
     t.string "code"
     t.string "secret"
@@ -39,7 +39,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_30_133603) do
     t.integer "num", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["num"], name: "index_ranking_boards_on_num", unique: true
+    t.index ["project_id", "num"], name: "index_ranking_boards_on_project_id_and_num", unique: true
     t.index ["project_id"], name: "index_ranking_boards_on_project_id"
   end
 
